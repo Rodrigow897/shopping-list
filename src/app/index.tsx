@@ -9,9 +9,9 @@ import styles from "./style";
 
 export default function Index() {
     const [items, setItems] = useState<CartItemType[]>([
-        { id: "1", name: "Apples", value: 1.5, amount: 4 },
-        { id: "2", name: "Bananas", value: 0.75, amount: 6 },
-        { id: "3", name: "Carrots", value: 0.5, amount: 10 },
+        { id: "1", name: "Apples", value: 1.5, amount: 4, isChecked: false },
+        { id: "2", name: "Bananas", value: 0.75, amount: 6, isChecked: false },
+        { id: "3", name: "Carrots", value: 0.5, amount: 10, isChecked: false },
     ]);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const [editingItem, setEditingItem] = useState<CartItemType | null>(null);
@@ -22,6 +22,7 @@ export default function Index() {
             name,
             amount,
             value: 0, // Default value
+            isChecked: false
         };
         setItems([...items, newItem]);
     };
@@ -37,6 +38,12 @@ export default function Index() {
             ));
             setEditingItem(null);
         }
+    };
+
+    const handleToggleCheck = (id: string) => {
+        setItems(items.map(item =>
+            item.id === id ? { ...item, isChecked: !item.isChecked } : item
+        ));
     };
 
     return (
@@ -57,12 +64,13 @@ export default function Index() {
                     data={items}
                     onDelete={handleDeleteItem}
                     onItemPress={setEditingItem}
+                    onToggleCheck={handleToggleCheck}
                 />
             </View>
 
             <View style={styles.totalContainer}>
                 <Text style={styles.totalText}>
-                    Total: ${items.reduce((acc, item) => acc + (item.value * item.amount), 0).toFixed(2)}
+                    Total: ${items.reduce((acc, item) => !item.isChecked ? acc + (item.value * item.amount) : acc, 0).toFixed(2)}
                 </Text>
             </View>
 
