@@ -19,7 +19,7 @@ type CartListProps = {
 const Item = ({ item, onDelete, onPress, onToggleCheck }: { item: CartItemType; onDelete: (id: string) => void; onPress: () => void; onToggleCheck: (id: string) => void }) => (
     <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10, height: 50, alignItems: "center", backgroundColor: "#e0ffe4ff", marginBottom: 5, marginHorizontal: 10, borderRadius: 5, elevation: 2, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 2, marginTop: 10 }}>
         <TouchableOpacity style={{}} onPress={onPress}>
-            <Text>{item.name} (x{item.amount})</Text>
+            <Text style={{ textDecorationLine: item.isChecked ? "line-through" : "none", fontWeight: "bold", fontSize: 16 }} >{item.name} (x{item.amount})</Text>
         </TouchableOpacity>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
