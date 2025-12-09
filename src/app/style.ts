@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        width: "100%"
+        width: "100%",
     },
     title:{
         fontSize: 20,
@@ -26,11 +26,18 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40,
         borderRadius: 8,
-        backgroundColor: "#47916A",
+        backgroundColor: "#00ff22",
         justifyContent: "center",
         alignItems: "center",
         shadowColor: "#000",
         elevation: 5,
+    },
+    body:{
+        height: "80%",
+        width: "100%",
+        marginTop: 20,
+        backgroundColor: "#f8f8f8ff",
+        borderRadius: 10,
     }
 })
 
