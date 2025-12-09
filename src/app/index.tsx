@@ -1,20 +1,77 @@
+import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CartList from "../components/cartList";
+import { AddProductModal } from "../components/AddProductModal";
+import CartList, { CartItemType } from "../components/cartList";
+import { EditPriceModal } from "../components/EditPriceModal";
 import styles from "./style";
 
 
 export default function Index() {
-    return(
+    const [items, setItems] = useState<CartItemType[]>([
+        { id: "1", name: "Apples", value: 1.5, amount: 4 },
+        { id: "2", name: "Bananas", value: 0.75, amount: 6 },
+        { id: "3", name: "Carrots", value: 0.5, amount: 10 },
+    ]);
+    const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+    const [editingItem, setEditingItem] = useState<CartItemType | null>(null);
+
+    const handleAddItem = (name: string, amount: number) => {
+        const newItem: CartItemType = {
+            id: Date.now().toString(),
+            name,
+            amount,
+            value: 0, // Default value
+        };
+        setItems([...items, newItem]);
+    };
+
+    const handleDeleteItem = (id: string) => {
+        setItems(items.filter(item => item.id !== id));
+    };
+
+    const handleEditPrice = (value: number) => {
+        if (editingItem) {
+            setItems(items.map(item =>
+                item.id === editingItem.id ? { ...item, value } : item
+            ));
+            setEditingItem(null);
+        }
+    };
+
+    return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Image style={styles.logo} source={require('../assets/logo-right.png')}/>
+                <Image style={styles.logo} source={require('../assets/logo-right.png')} />
                 <Text style={styles.title}>Lista de compras</Text>
-                <TouchableOpacity activeOpacity={0.4} style={styles.button}><Text style={{color: "white", fontSize: 25}}>+</Text></TouchableOpacity>
+                <TouchableOpacity
+                    activeOpacity={0.4}
+                    style={styles.button}
+                    onPress={() => setIsAddModalVisible(true)}
+                >
+                    <Text style={{ color: "white", fontSize: 25 }}>+</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.body}>
-                <CartList />
+                <CartList
+                    data={items}
+                    onDelete={handleDeleteItem}
+                    onItemPress={setEditingItem}
+                />
             </View>
+
+            <AddProductModal
+                visible={isAddModalVisible}
+                onClose={() => setIsAddModalVisible(false)}
+                onAdd={handleAddItem}
+            />
+
+            <EditPriceModal
+                visible={!!editingItem}
+                onClose={() => setEditingItem(null)}
+                onConfirm={handleEditPrice}
+                itemName={editingItem?.name}
+            />
         </SafeAreaView>
     )
 }
