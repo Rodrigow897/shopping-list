@@ -60,6 +60,12 @@ export default function Index() {
                 />
             </View>
 
+            <View style={styles.totalContainer}>
+                <Text style={styles.totalText}>
+                    Total: ${items.reduce((acc, item) => acc + (item.value * item.amount), 0).toFixed(2)}
+                </Text>
+            </View>
+
             <AddProductModal
                 visible={isAddModalVisible}
                 onClose={() => setIsAddModalVisible(false)}
