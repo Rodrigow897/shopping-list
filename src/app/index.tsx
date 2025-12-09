@@ -70,7 +70,7 @@ export default function Index() {
 
             <View style={styles.totalContainer}>
                 <Text style={styles.totalText}>
-                    Total: ${items.reduce((acc, item) => !item.isChecked ? acc + (item.value * item.amount) : acc, 0).toFixed(2)}
+                    Total: ${items.reduce((acc, item) => acc + (item.value * item.amount), 0).toFixed(2)}
                 </Text>
             </View>
 
