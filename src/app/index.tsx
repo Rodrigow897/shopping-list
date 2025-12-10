@@ -1,3 +1,4 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -56,7 +57,7 @@ export default function Index() {
                     style={styles.button}
                     onPress={() => setIsAddModalVisible(true)}
                 >
-                    <Text style={{ color: "white", fontSize: 25 }}>+</Text>
+                    <Text style={{ color: "white", fontSize: 25 }}>{<Ionicons name="add-outline" size={34}/>}</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.body}>
@@ -70,7 +71,7 @@ export default function Index() {
 
             <View style={styles.totalContainer}>
                 <Text style={styles.totalText}>
-                    Total: ${items.reduce((acc, item) => acc + (item.value * item.amount), 0).toFixed(2)}
+                    Total: R${items.reduce((acc, item) => acc + (item.value * item.amount), 0).toFixed(2)}
                 </Text>
             </View>
 

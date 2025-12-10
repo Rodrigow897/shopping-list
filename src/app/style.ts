@@ -2,8 +2,6 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 10,
-        paddingHorizontal: 10,
         alignItems: "center",
         flex: 1,
         backgroundColor: "#FFFFFF",
@@ -13,6 +11,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
+        backgroundColor: "#161A30"
     },
     title: {
         fontSize: 20,
@@ -25,12 +24,6 @@ const styles = StyleSheet.create({
     button: {
         height: 40,
         width: 40,
-        borderRadius: 8,
-        backgroundColor: "#00ff22",
-        justifyContent: "center",
-        alignItems: "center",
-        shadowColor: "#000",
-        elevation: 5,
     },
     body: {
         height: "80%",

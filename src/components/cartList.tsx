@@ -23,7 +23,7 @@ const Item = ({ item, onDelete, onPress, onToggleCheck }: { item: CartItemType; 
         </TouchableOpacity>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ marginRight: 10 }}>${(item.value * item.amount).toFixed(2)}</Text>
+            <Text style={{ marginRight: 10 }}>R${(item.value * item.amount).toFixed(2)}</Text>
             <TouchableOpacity onPress={() => onToggleCheck(item.id)}>
                 <Ionicons
                     name={item.isChecked ? "checkmark-circle" : "ellipse-outline"}
